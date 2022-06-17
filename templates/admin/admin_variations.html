@@ -1,0 +1,24 @@
+{% include 'admin/admin_base.html' %}
+
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Product Name</th>
+        <th scope="col">Category</th>
+        <th scope="col">Value</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for variation in variations %}
+        <tr>
+            <td>{{ variation.product }}</td>
+            <td>{{ variation.variation_category }}</td>
+            <td>{{ variation.variation_value }}</td> 
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'admin_add_variation' %}" class="btn btn-primary"><span class="text">Add Varients</span> <i class="fas fa-eye"></i></a>
+{% block content %}
+
+{% endblock %}

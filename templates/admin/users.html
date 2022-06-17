@@ -1,0 +1,62 @@
+{% include 'admin/admin_base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="row align-items-center">
+        <div class="border-0 mb-4">
+            <div
+                class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+                <h3 class="fw-bold mb-0">Customers Information</h3>
+            </div>
+        </div>
+    </div> <!-- Row end  -->
+
+    {% for user in users %}
+        {% if not user.is_superadmin %}
+            <div class="body d-flex py-lg-3 py-md-2">
+                <div class="container-xxl">
+                    <div class="row clearfix g-3">
+                        <div class="col-sm-12">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <table id="myProjectTable" class="table table-hover align-middle mb-0"
+                                        style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Mail</th>
+                                                <th>Phone</th>
+                                                <th>Username</th>
+                                                <th>date_joined</th>
+                                                <th>Total Order</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{ user.first_name }}</td>
+                                                <td>{{ user.last_name }}</td>
+                                                <td>{{ user.email }}</td>
+                                                <td>{{ user.phone_number }}</td>
+                                                <td>{{ user.username }}</td>
+                                                <td>{{ user.date_joined }}</td>
+                                                <td>No. of orders</td>
+                                                <td>
+                                                    {% if user.is_active %}
+                                                        <a href="{% url 'user_deactivation' user.id %}" class="btn btn-danger mt-3" onclick="return confirm('Are you sure you want to deactivate this user?')" >Deactivate</a>
+                                                    {% else %}
+                                                    <a href="{% url 'user_activation' user.id %}" class="btn btn-danger mt-3" onclick="return confirm('Are you sure you want to activate this user?')" >Activate</a>
+                                                    {% endif %}
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- Row End -->
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

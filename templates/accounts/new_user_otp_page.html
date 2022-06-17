@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<section class="section-conten padding-y" style="min-height:84vh">
+
+
+    <p class="text-center mt-4">Enter OTP recieved on your Phone to Varify your account.</p>
+    <div class="card mx-auto" style="max-width: 380px; margin-top:100px;">
+        <div class="card-body">
+
+            {% include 'includes/alerts.html' %}
+            <form action="{% url 'new_user_otp_varification' %}" method="POST" onsubmit="return validation()">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input id="otp" type="text" class="form-control" placeholder="Enter OTP" name="otp" onchange="return validation()">
+                    <span id="messages"></span>
+                </div>
+
+                <div class="form-group"></div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block" onclick="return validation()">Enter OTP </button>
+                    <!-- <div class="form-group">
+                        <a href="{% url 'otp_login' %}" class="float-right">Didn't get the OTP? send OTP again.</a>
+                    </div> -->
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+    function validation(){
+        var a = document.getElementById("otp").value;
+
+        if(a==""){
+            document.getElementById("messages").innerHTML="Please enter the OTP recievd on your Phone Numb";
+            return false;
+        }
+        if (isNaN(a)){
+            document.getElementById("messages").innerHTML="Only Numbers allowed";
+            return false;
+        }
+        if (a.length<6){
+            document.getElementById("messages").innerHTML="Please recheck the OTP";
+            return false;
+        }
+        if (a.length>6){
+            document.getElementById("messages").innerHTML="Please recheck the OTP";
+            return false;
+        }
+
+    }
+
+</script>
+
+{% endblock %}

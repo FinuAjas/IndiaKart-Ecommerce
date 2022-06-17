@@ -1,0 +1,221 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>IndiaCart-admin </title>
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon"> <!-- Favicon-->
+
+    <!-- plugin css file  -->
+    <link rel="stylesheet" href="{% static 'plugin_admin/datatables/responsive.dataTables.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugin_admin/datatables/dataTables.bootstrap5.min.css'%}">
+    <link rel="stylesheet" href="{% static 'plugin_admin/nouislider/nouislider.min.css'%}">
+
+    <!-- project css file  -->
+    <link rel="stylesheet" href="{% static 'css_admin/ebazar.style.min.css' %}">
+</head>
+
+<body>
+    <div id="ebazar-layout" class="theme-blue">
+
+<!-- sidebar -->
+<div class="sidebar px-4 py-4 py-md-4 me-0">
+    <div class="d-flex flex-column h-100">
+        <a href="{% url 'adminhome' %}" class="mb-0 brand-icon">
+            <span class="logo-icon">
+                <i class="bi bi-bag-check-fill fs-4"></i>
+            </span>
+            <span class="logo-text">IndiaKart</span>
+        </a>
+        <!-- Menu: main ul -->
+        <ul class="menu-list flex-grow-1 mt-3">
+            <li><a class="m-link" href="{% url 'adminhome' %}"><i class="icofont-home fs-5"></i> <span>Dashboard</span></a></li>
+            <li class="collapsed">
+                <a class="m-link active" data-bs-toggle="collapse" data-bs-target="#menu-product" href="#">
+                    <i class="icofont-truck-loaded fs-5"></i> <span>Products</span> <span class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>
+                    <!-- Menu: Sub menu ul -->
+                    <ul class="sub-menu collapse show" id="menu-product">
+                        <li><a class="ms-link active" href="{% url 'admin_product_list' %}">Product List</a></li>
+                        <li><a class="ms-link" href="{% url 'admin_add_product' %}">Product Add</a></li>
+                        <li><a class="ms-link" href="{% url 'admin_add_product_images' %}">Product Images Add</a></li>
+                    </ul>
+            </li>
+            <li class="collapsed">
+                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#categories" href="#">
+                    <i class="icofont-chart-flow fs-5"></i> <span>Categories</span> <span class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>
+                    <!-- Menu: Sub menu ul -->
+                    <ul class="sub-menu collapse" id="categories">
+                        <li><a class="ms-link" href="{% url 'admin_categories' %}">Categories List</a></li>
+                        <li><a class="ms-link" href="{% url 'admin_add_category' %}">Categories Add</a></li>
+                    </ul>
+            </li>
+            <li class="collapsed">
+                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#app" href="#">
+                <i class="icofont-code-alt fs-5"></i> <span>Varients</span> <span class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>
+                <!-- Menu: Sub menu ul -->
+                <ul class="sub-menu collapse" id="app">
+                    <li><a class="ms-link" href="{% url 'admin_variation' %}">All Varients</a></li>
+                </ul>
+            </li>
+            <li class="collapsed">
+                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#customers-info" href="#">
+                <i class="icofont-funky-man fs-5"></i> <span>Customers</span> <span class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>
+                <!-- Menu: Sub menu ul -->
+                <ul class="sub-menu collapse" id="customers-info">
+                    <li><a class="ms-link" href="{% url 'users' %}">Customers List</a></li>
+                </ul>
+            </li>
+            <li class="collapsed">
+                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-order" href="#">
+                <i class="icofont-notepad fs-5"></i> <span>Orders</span> <span class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>
+                <!-- Menu: Sub menu ul -->
+                <ul class="sub-menu collapse" id="menu-order">
+                    <li><a class="ms-link" href="{% url 'admin_orders' %}">Orders List</a></li>
+                    <li><a class="ms-link" href="order-details.html">Order Details</a></li>
+                    <li><a class="ms-link" href="order-invoices.html">Order Invoices</a></li>
+                </ul>
+            </li>
+            <li class="collapsed">
+                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-sale" href="#">
+                <i class="icofont-sale-discount fs-5"></i> <span>Sales Promotion</span> <span class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>
+                <!-- Menu: Sub menu ul -->
+                <ul class="sub-menu collapse" id="menu-sale">
+                    <li><a class="ms-link" href="coupons-list.html">Coupons List</a></li>
+                    <li><a class="ms-link" href="coupon-add.html">Coupons Add</a></li>
+                    <li><a class="ms-link" href="coupon-edit.html">Coupons Edit</a></li>
+                </ul>
+            </li>
+            <li class="collapsed">
+                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-inventory" href="#">
+                <i class="icofont-chart-histogram fs-5"></i> <span>Inventory</span> <span class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>
+                <!-- Menu: Sub menu ul -->
+                <ul class="sub-menu collapse" id="menu-inventory">
+                    <li><a class="ms-link" href="inventory-info.html">Stock List</a></li>
+                    <li><a class="ms-link" href="purchase.html">Purchase</a></li>
+                    <li><a class="ms-link" href="supplier.html">Supplier</a></li>
+                    <li><a class="ms-link" href="returns.html">Returns</a></li>
+                    <li><a class="ms-link" href="department.html">Department</a></li>
+                </ul>
+            </li>
+            <li class="collapsed">
+                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-Componentsone" href="#"><i
+                        class="icofont-ui-calculator"></i> <span>Accounts</span> <span class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>
+                <!-- Menu: Sub menu ul -->
+                <ul class="sub-menu collapse" id="menu-Componentsone">
+                    <li><a class="ms-link" href="invoices.html">Invoices </a></li>
+                    <li><a class="ms-link" href="expenses.html">Expenses </a></li>
+                    <li><a class="ms-link" href="salaryslip.html">Salary Slip </a></li>
+                </ul>
+            </li>
+            <li><a class="m-link" href="store-locator.html"><i class="icofont-focus fs-5"></i> <span>Store Locator</span></a></li>
+            <li><a class="m-link" href="ui-elements/ui-alerts.html"><i class="icofont-paint fs-5"></i> <span>UI Components</span></a></li>
+            <li class="collapsed">
+                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#page" href="#">
+                <i class="icofont-page fs-5"></i> <span>Other Pages</span> <span class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>
+                <!-- Menu: Sub menu ul -->
+                <ul class="sub-menu collapse" id="page">
+                    <li><a class="ms-link" href="admin-profile.html">Profile Page</a></li>
+                    <li><a class="ms-link" href="purchase-plan.html">Price Plan Example</a></li>
+                    <li><a class="ms-link" href="charts.html">Charts Example</a></li>
+                    <li><a class="ms-link" href="table.html">Table Example</a></li>
+                    <li><a class="ms-link" href="forms.html">Forms Example</a></li>
+                    <li><a class="ms-link" href="icon.html">Icons</a></li>
+                    <li><a class="ms-link" href="contact.html">Contact Us</a></li>
+                </ul>
+            </li>
+        </ul>
+        <!-- Menu: menu collepce btn -->
+        <button type="button" class="btn btn-link sidebar-mini-btn text-light">
+            <span class="ms-2"><i class="icofont-bubble-right"></i></span>
+        </button>
+    </div>
+</div>        
+
+
+        <!-- main body area -->
+        <div class="main px-lg-4 px-md-4">
+
+            <!-- Body: Header -->
+            <div class="header">
+                <nav class="navbar py-4">
+                    <div class="container-xxl">
+
+                        <!-- header rightbar icon -->
+                        <div class="h-right d-flex align-items-center mr-5 mr-lg-0 order-1">
+                            <div class="dropdown user-profile ml-2 ml-sm-3 d-flex align-items-center zindex-popover">
+                                <div class="u-info me-2">
+                                    <p class="mb-0 text-end line-height-sm "><span class="font-weight-bold">{{ user.first_name }}</span></p>
+                                    <a href="{% url 'admin_logout' %}" class="btn btn-danger mt-3">Logout</a>
+                                </div>
+                                <a class="nav-link dropdown-toggle pulse p-0" href="#" role="button"
+                                    data-bs-toggle="dropdown" data-bs-display="static">
+                                    <img class="avatar lg rounded-circle img-thumbnail"
+                                        src="{% static 'images_admin/profile_av.svg' %}" alt="profile">
+                                </a>
+                                <div
+                                    class="dropdown-menu rounded-lg shadow border-0 dropdown-animation dropdown-menu-end p-0 m-0">
+                                    <div class="card border-0 w280">
+                                        <div class="card-body pb-0">
+                                            <div class="d-flex py-1">
+                                                <img class="avatar rounded-circle" src="{% static 'images_admin/profile_av.svg' %}"
+                                                    alt="profile">
+                                                <div class="flex-fill ms-3">
+                                                    <p class="mb-0"><span class="font-weight-bold">{{ user.first_name }}</span></p>
+                                                    <small class="">{{ user }}</small>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <hr class="dropdown-divider border-dark">
+                                            </div>
+                                        </div>
+                                        <div class="list-group m-2 ">
+                                            <a href="admin-profile.html"
+                                                class="list-group-item list-group-item-action border-0 "><i
+                                                    class="icofont-ui-user fs-5 me-3"></i>Profile Page</a>
+                                            <a href="ui-elements/auth-signin.html"
+                                                class="list-group-item list-group-item-action border-0 "><i
+                                                    class="icofont-logout fs-5 me-3"></i>Signout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="order-0 col-lg-4 col-md-4 col-sm-12 col-12 mb-3 mb-md-0 ">
+                        </div>
+
+                    </div>
+                </nav>
+            </div>
+
+            {% block content %}
+     
+
+            {% endblock %} 
+
+            <!-- Jquery Core Js -->
+    <script src="{% static 'bundles_admin/libscripts.bundle.js' %}"></script>
+
+    <!-- Plugin Js -->
+    <script src="{% static 'bundles_admin/apexcharts.bundle.js' %}"></script>
+    <script src="{% static 'bundles_admin/dataTables.bundle.js' %}"></script>
+
+    <!-- Jquery Page Js -->
+    <script src="{% static 'js_admin/template.js' %}"></script>
+    <script src="{% static 'js_admin/page/index.js' %}"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1Jr7axGGkwvHRnNfoOzoVRFV3yOPHJEU&amp;callback=myMap"></script>
+    <script>
+        $('#myDataTable')
+            .addClass('nowrap')
+            .dataTable({
+                responsive: true,
+                columnDefs: [
+                    { targets: [-1, -3], className: 'dt-body-right' }
+                ]
+            });
+    </script>
